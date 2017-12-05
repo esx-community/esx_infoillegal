@@ -8,7 +8,7 @@ Vous avez deux façons soit par une notification approximative de l’endroit ou
 
 Dans le fichier config vous retrouverez :
 1. L'heure d'ouverture et de fermeture que vous pouvez modifier ligne 4 et 5
-2. Active le blip sur la map, si vous voulez le désactiver passé l'en false
+2. Active le blip sur la map, si vous voulez le désactiver passé le en false
 3. Active l'heure d'ouverture ou non, si vous voulez laisser le vendeur d'info ouvert tout le temps passé l'en false
 4. Active la position sur le GPS ou non, si vous voulez juste les notif passés le en false
 5. Modifier le prix de l'info pour la récolte, le traitement et la revente
