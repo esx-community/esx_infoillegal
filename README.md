@@ -13,7 +13,7 @@ Dans le fichier config vous retrouverez :
 4. Active la position sur le GPS ou non, si vous voulez juste les notif passés le en false
 5. Modifier le prix de l'info pour la récolte, le traitement et la revente
 
-Vous pouvez bien entendu ajouter toutes les drogues que vous voulez
+Vous pouvez bien entendu ajouter toutes les drogues que vous voulez, n'oublié pas de modifier le fichier locales/fr.lua pour changer les traductions et les infos données dans les notifications
 
 #############################################################################
 
@@ -30,6 +30,8 @@ In the config file you will find:
 4. Activate the position on the GPS or not, if you just want the notif passed to false
 5. Change the price of info for harvesting, processing and resale
 
-You can of course add any drugs you want
+You can of course add any drugs you want, do not forget to modify the file locales/en.lua to change the translations and the information given in the notifications
 
 Sorry if there are any mistakes in pronunciation I'm not very good in English do not hesitate to correct me :)
+
+https://github.com/rockmar1/esx_infoillegal
