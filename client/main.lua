@@ -8,6 +8,8 @@ local CurrentActionMsg        = ''
 local CurrentActionData       = {}
 local times 				  = 0
 local blipillegal 			  = {}
+local randomnumber 			  = 0
+local count					  = 0
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -290,28 +292,41 @@ AddEventHandler('esx_infoillegal:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 end)
 
--- Create Blips
 
+-- Create Blips
 
 Citizen.CreateThread(function ()
 	while true do
 		Citizen.Wait(0)
 		heure = tonumber(GetClockHours())
+		local coords      = GetEntityCoords(GetPlayerPed(-1))
+		local isInMarker  = false
+		local currentZone = nil
+
+		
 		if Config.Hours then
+			
 			if heure > Config.openHours and heure < Config.closeHours then	
 				if Config.Blip then
 					if times == 0 then
+					count = 0
+						for k,v in pairs(Config.Zones) do
+							count = count + 1
+						end
+					randomnumber = math.random(1,count)
 						for k,v in pairs(Config.Zones)do
-							blipillegal[k] = AddBlipForCoord(v.x, v.y, v.z)
-							SetBlipSprite (blipillegal[k], 133)
-							SetBlipDisplay(blipillegal[k], 4)
-							SetBlipScale  (blipillegal[k], 1.0)
-							SetBlipColour (blipillegal[k], 5)
-							SetBlipAsShortRange(blipillegal[k], true)
+							if k == randomnumber then
+								blipillegal[k] = AddBlipForCoord(v.x, v.y, v.z)
+								SetBlipSprite (blipillegal[k], 133)
+								SetBlipDisplay(blipillegal[k], 4)
+								SetBlipScale  (blipillegal[k], 1.0)
+								SetBlipColour (blipillegal[k], 5)
+								SetBlipAsShortRange(blipillegal[k], true)
 
-							BeginTextCommandSetBlipName('STRING')
-							AddTextComponentString(_U('illegalblip'))
-							EndTextCommandSetBlipName(blipillegal[k])
+								BeginTextCommandSetBlipName('STRING')
+								AddTextComponentString(_U('illegalblip'))
+								EndTextCommandSetBlipName(blipillegal[k])
+							end
 						end
 						times = 1
 					end
@@ -325,24 +340,33 @@ Citizen.CreateThread(function ()
 					times = 0
 				end
 			end
-		end
-	end
-end)
+		else
+			if times == 0 then
+				for k,v in pairs(Config.Zones)do
+					blipillegal[k] = AddBlipForCoord(v.x, v.y, v.z)
+					SetBlipSprite (blipillegal[k], 133)
+					SetBlipDisplay(blipillegal[k], 4)
+					SetBlipScale  (blipillegal[k], 1.0)
+					SetBlipColour (blipillegal[k], 5)
+					SetBlipAsShortRange(blipillegal[k], true)
 
--- Enter / Exit marker events
-Citizen.CreateThread(function()
-	while true do
-		Wait(0)
-		local coords      = GetEntityCoords(GetPlayerPed(-1))
-		local isInMarker  = false
-		local currentZone = nil
-		
-		for k,v in pairs(Config.Zones) do
-			if(GetDistanceBetweenCoords(coords, v.x, v.y, v.z, true) < Config.MarkerSize.x / 2) then
-				isInMarker  = true
-				currentZone = k
+					BeginTextCommandSetBlipName('STRING')
+					AddTextComponentString(_U('illegalblip'))
+					EndTextCommandSetBlipName(blipillegal[k])
+				end
+				times = 1
 			end
 		end
+		
+		-- Enter / Exit marker events
+			for k,v in pairs(Config.Zones) do
+				if k == randomnumber then
+					if(GetDistanceBetweenCoords(coords, v.x, v.y, v.z, true) < Config.MarkerSize.x / 2) then
+						isInMarker  = true
+						currentZone = k
+					end
+				end
+			end
 		
 		if isInMarker and not HasAlreadyEnteredMarker then
 			HasAlreadyEnteredMarker = true
