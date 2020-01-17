@@ -1,23 +1,23 @@
-Config					= {}
-Config.Locale			= 'fr'
-Config.MarkerSize   	= {x = 3.0, y = 3.0, z = 3.0}
-Config.openHours		= 18
-Config.closeHours		= 24
-Config.Blip 			= true
-Config.Hours 			= true
-Config.GPS 				= true
-Config.PriceWeedF 		= 50000
-Config.PriceWeedT		= 55000
-Config.PriceWeedR		= 80000
-Config.PriceOpiumF 		= 90000
-Config.PriceOpiumT		= 125000
-Config.PriceOpiumR		= 180000
-Config.PriceCokeF 		= 150000
-Config.PriceCokeT		= 250000
-Config.PriceCokeR		= 300000
-Config.PriceMethF 		= 90000
-Config.PriceMethT		= 125000
-Config.PriceMethR		= 180000
+Config	= {}
+Config.Locale	= 'fr'
+Config.MarkerSize = {x = 3.0, y = 3.0, z = 3.0}
+Config.openHours = 18
+Config.closeHours = 24
+Config.Blip = true
+Config.Hours = true
+Config.GPS = true
+Config.PriceWeedF = 50000
+Config.PriceWeedT = 55000
+Config.PriceWeedR = 80000
+Config.PriceOpiumF = 90000
+Config.PriceOpiumT = 125000
+Config.PriceOpiumR = 180000
+Config.PriceCokeF = 150000
+Config.PriceCokeT = 250000
+Config.PriceCokeR = 300000
+Config.PriceMethF = 90000
+Config.PriceMethT = 125000
+Config.PriceMethR = 180000
 
 Config.Zones = {
 	{x = 149.14811706543, y = 323.48037719727, z = 111.13859558105},
