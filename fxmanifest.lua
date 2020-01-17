@@ -1,3 +1,7 @@
+fx_version 'adamant'
+
+game 'gta5'
+
 description 'ESX Vendeur d\'info Illegal'
 
 server_scripts {
