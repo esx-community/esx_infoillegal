@@ -1,15 +1,9 @@
-ESX                           = nil
-local GUI					  = {}
+ESX = nil
+local GUI, CurrentActionData, blipillegal = {}, {}, {}
 local HasAlreadyEnteredMarker = false
-local LastZone                = nil
-GUI.Time           			  = 0
-local CurrentAction           = nil
-local CurrentActionMsg        = ''
-local CurrentActionData       = {}
-local times 				  = 0
-local blipillegal 			  = {}
-local randomnumber 			  = 0
-local count					  = 0
+local LastZone, CurrentAction, CurrentActionMsg
+GUI.Time = 0
+local times, randomnumber, count = 0, 0, 0
 
 Citizen.CreateThread(function()
 	while ESX == nil do
@@ -29,9 +23,7 @@ AddEventHandler("esx_infoillegal:notify", function(icon, type, sender, title, te
     end)
 end)
 
-
 function OpenInfoIllegalMenu()
-
   local elements = { }
 	  table.insert(elements, {label = _U('weed') .. Config.PriceWeedF .. _U('weed1'),    value = 'weed'})
 	  table.insert(elements, {label = _U('tweed') .. Config.PriceWeedT .. _U('tweed1'),    value = 'tweed'})
@@ -48,15 +40,11 @@ function OpenInfoIllegalMenu()
 
   ESX.UI.Menu.CloseAll()
 
-    ESX.UI.Menu.Open(
-      'default', GetCurrentResourceName(), 'info',
-      {
+    ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'info', {
         title    = _U('info'),
         align    = 'top-left',
         elements = elements,
-        },
-
-        function(data, menu)
+        }, function(data, menu)
 
         if data.current.value == 'weed' then
            TriggerServerEvent("esx_infoillegal:Weed")
@@ -116,17 +104,13 @@ function OpenInfoIllegalMenu()
 
       CurrentAction     = 'menu_info_illegal'
       CurrentActionData = {}
-
-    end,
-    function(data, menu)
+    end, function(data, menu)
 
       menu.close()
 
       CurrentAction     = 'menu_info_illegal'
       CurrentActionData = {}
-    end
-    )
-
+    end)
 end
 
 RegisterNetEvent("esx_infoillegal:WeedFarm")
@@ -292,9 +276,7 @@ AddEventHandler('esx_infoillegal:hasExitedMarker', function(zone)
 	ESX.UI.Menu.CloseAll()
 end)
 
-
 -- Create Blips
-
 Citizen.CreateThread(function ()
 	while true do
 		Citizen.Wait(0)
@@ -303,7 +285,6 @@ Citizen.CreateThread(function ()
 		local isInMarker  = false
 		local currentZone = nil
 
-		
 		if Config.Hours then
 			
 			if heure > Config.openHours and heure < Config.closeHours then	
@@ -357,7 +338,7 @@ Citizen.CreateThread(function ()
 				times = 1
 			end
 		end
-		
+
 		-- Enter / Exit marker events
 			for k,v in pairs(Config.Zones) do
 				if k == randomnumber then
@@ -367,7 +348,7 @@ Citizen.CreateThread(function ()
 					end
 				end
 			end
-		
+
 		if isInMarker and not HasAlreadyEnteredMarker then
 			HasAlreadyEnteredMarker = true
 			TriggerEvent('esx_infoillegal:hasEnteredMarker', currentZone)
